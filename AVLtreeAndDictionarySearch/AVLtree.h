@@ -1,22 +1,8 @@
 ﻿#ifndef AVLTREE
 #define AVLTREE
 #include <iostream>
+#include "AvlNode.h"
 
-template <class Key>
-class AvlNode {
-private:
-	Key key;
-	AvlNode* parent;
-	AvlNode* left;
-	AvlNode* right;
-
-	//-1, 0, 1
-	char balance;
-
-public:
-	AvlNode(Key key_from_user):key(key_from_user), parent(0), left(0), right(0){}
-
-};
 
 //=============================================================================
 //== AVLtree ==================================================================
@@ -26,8 +12,18 @@ template <class Key>
 class AVLtree {
 private:
 	AvlNode<Key>* root;
-	void recursive_insert (Key key, AvlNode<Key>* current_root);
 
+	/*
+		Осуществляет рекурсивную вставку элемента с ключом key, если это необходимо.
+		Возвращает current_root со сбалансированным AVL поддеревом.
+	*/
+	AvlNode<Key>* recursive_insert (Key key, AvlNode<Key>* current_root);
+
+	/*
+		Осуществляет балансировку для node_for_balance, если это необходимо.
+		Возвращает node_for_balance со сбалансированным поддеревом.
+	*/
+	AvlNode<Key>* balance (AvlNode<Key>* node_for_balance);
 public:
 	AVLtree():root(0){}
 
@@ -40,6 +36,5 @@ public:
 	*/
 	void insert (Key key);
 };
-
 #include "AVLtree.hpp"
 #endif

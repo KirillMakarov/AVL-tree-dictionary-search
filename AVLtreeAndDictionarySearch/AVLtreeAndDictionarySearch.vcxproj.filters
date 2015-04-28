@@ -32,5 +32,11 @@
     <ClInclude Include="MySpellChecker.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="AvlNode.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLNode.hpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
