@@ -13,6 +13,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AVLtree.h" />
+    <ClInclude Include="AVLtree.hpp" />
+    <ClInclude Include="MySpellChecker.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{83FA4A8D-149A-4418-B267-20A56E60F81A}</ProjectGuid>
     <RootNamespace>AVLtreeAndDictionarySearch</RootNamespace>

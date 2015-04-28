@@ -1,12 +1,13 @@
-#include <iostream>
+﻿#include <iostream>
+#include "MySpellChecker.h"
 
 using namespace std;
 
 int main () {
-	cout<<"test\n";
-	cout<<"stol\n";
-	cout<<"vs is nice";
-	cout<<"vsvs";
+	cout<<"==== Part I ====\n";
+	MySpellChecker checker;
+	checker.readDictionaryFile();
+
 	system("pause");
 	return 0;
 }
