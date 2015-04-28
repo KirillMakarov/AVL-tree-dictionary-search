@@ -6,8 +6,11 @@ using namespace std;
 int main () {
 	cout<<"==== Part I ====\n";
 	MySpellChecker checker;
-	checker.readDictionaryFile();
+	
+	//todo: интерактив с пользователем
+	string full_path = "input_dictionary.txt";
+	checker.readDictionaryFile(full_path);
 
 	system("pause");
-	return 0;
+	return EXIT_SUCCESS;
 }

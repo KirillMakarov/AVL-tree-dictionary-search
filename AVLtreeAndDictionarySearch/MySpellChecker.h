@@ -7,10 +7,10 @@ using namespace std;
 class MySpellChecker {
 public:
 	/*
-		Чтение слов, содержащихся в словаре и построеник AVL-дерева
+		Чтение слов, содержащихся в словаре и построение AVL-дерева
 		с n узлами, где n -- число слов в словаре.
 	*/
-	void readDictionaryFile();
+	void readDictionaryFile(string path);
 
 	/*
 		Возвращается значение true, если построенное дерево 
@@ -22,7 +22,7 @@ public:
 	/*
 		Получение(формирование) списка слов документа.
 	*/
-	void readDocumentationFile();
+	void readDocumentationFile(string path);
 
 	/*
 		Каждое слово документа, которое не обнаружено в словаре, выводится
@@ -31,7 +31,8 @@ public:
 	void compare();
 
 private:
-	AVLtree<string> dictionary, word;
+	AVLtree<string> dictionary, words;
+	void readCustomFile(string path, AVLtree<string> avl_tree);
 };
 
 #endif
