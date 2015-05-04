@@ -32,7 +32,8 @@ public:
 
 private:
 	AVLtree<string> dictionary, words;
-	void readCustomFile(string path, AVLtree<string> avl_tree);
+	void readCustomFile(string path, AVLtree<string> &avl_tree);
+	void recursive_compare(AvlNode<string>* node);
 };
 
 #endif

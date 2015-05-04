@@ -8,9 +8,11 @@ int main () {
 	MySpellChecker checker;
 	
 	//todo: интерактив с пользователем
-	string full_path = "input_dictionary.txt";
+	string full_path = "input_dictionary_full.txt";
+	string document_path = "input.txt";
 	checker.readDictionaryFile(full_path);
-
+	checker.readDocumentationFile(document_path);
+	checker.compare();
 	system("pause");
 	return EXIT_SUCCESS;
 }

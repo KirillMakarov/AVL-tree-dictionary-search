@@ -12,6 +12,7 @@
 template <class Key>
 class AVLtree {
 private:
+	AvlNode<Key>* root;
 	/*
 	Осуществляет рекурсивную вставку элемента с ключом key, если это необходимо.
 	Возвращает current_root со сбалансированным AVL поддеревом.
@@ -35,9 +36,7 @@ private:
 public:
 	AVLtree():root(0), size(0){}
 	~AVLtree(){destroy(root);}
-	
-	AvlNode<Key>* root;//todo сделать private
-
+	AvlNode<Key>* getRoot(){return root;}
 	/*
 	Добавляет элемент key в AVL дерево,
 	при необходимости происходит балансировка.
