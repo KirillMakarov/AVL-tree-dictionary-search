@@ -124,4 +124,20 @@ void AVLtree<Key>::destroy(AvlNode<Key>* node){
 		delete node;
 	}
 }
+
+template <class Key>
+bool AVLtree<Key>::find(Key key){
+	if (!root) return false;
+	AvlNode<Key>* temp_node = root;
+	while (temp_node->key != key)
+	{
+		if (key > temp_node->key)
+			temp_node = temp_node -> right;
+		else 
+			temp_node = temp_node -> left;
+		if (!temp_node)
+			return false;
+	}
+	return true;
+}
 #endif

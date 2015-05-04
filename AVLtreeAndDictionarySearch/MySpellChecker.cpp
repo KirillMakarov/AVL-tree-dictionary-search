@@ -22,4 +22,7 @@ void MySpellChecker::readDocumentationFile (string path){
 	readCustomFile(path, MySpellChecker::words);
 }
 
+void MySpellChecker::compare(){
+	
+}
 #endif

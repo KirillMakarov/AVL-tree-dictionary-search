@@ -46,8 +46,8 @@ public:
 	то есть двух элементов с одинаковым ключом в AVL-дереве не существует.
 	*/
 	void insert (Key key);
-
 	int getSize() const;
+	bool find (Key key);
 
 	/*
 		функция для тестирования
