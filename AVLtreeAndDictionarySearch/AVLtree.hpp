@@ -2,6 +2,12 @@
 #define AVLTREE_HPP
 #include "AVLtree.h"
 
+template <class Key>
+int AVLtree<Key>::getSize() const
+{
+	return size;
+}
+
 //Можно создать одну универсальную функцию для поворотов, 
 //но разделение на 2 делает код более читабельным
 //...
@@ -70,7 +76,10 @@ template <class Key>
 AvlNode<Key>* AVLtree<Key>::recursive_insert (Key key, AvlNode<Key>* current_root){
 
 	if (current_root == nullptr)
+	{
+		size++;
 		return new AvlNode<Key>(key);
+	}
 	if (key == current_root -> key)
 		return current_root;
 
@@ -93,6 +102,7 @@ void AVLtree<Key>::print_tree(){
 	recursive_print(root, 0);
 }
 
+//todo delete this function in release version
 template <class Key>
 void AVLtree<Key>::recursive_print(AvlNode<Key>* p, int level){
 	 if(p)
@@ -104,4 +114,14 @@ void AVLtree<Key>::recursive_print(AvlNode<Key>* p, int level){
     }
 }
 
+
+template <class Key>
+void AVLtree<Key>::destroy(AvlNode<Key>* node){
+	if (node)
+	{
+		destroy(node->left);
+		destroy(node->right);
+		delete node;
+	}
+}
 #endif

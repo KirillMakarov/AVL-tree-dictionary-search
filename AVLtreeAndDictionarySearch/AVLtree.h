@@ -8,6 +8,7 @@
 //== AVLtree ==================================================================
 //=============================================================================
 
+//TODO: Реализовать удаление узла в качестве дополнительного задания.
 template <class Key>
 class AVLtree {
 private:
@@ -27,8 +28,13 @@ private:
 	AvlNode<Key>* simple_rotate_right (AvlNode<Key>* node_for_rotate);
 
 	void recursive_print(AvlNode<Key>* p, int level);
+
+	int size;
+
+	void destroy(AvlNode<Key>* node);
 public:
-	AVLtree():root(0){}
+	AVLtree():root(0), size(0){}
+	~AVLtree(){destroy(root);}
 	
 	AvlNode<Key>* root;//todo сделать private
 
@@ -41,10 +47,11 @@ public:
 	*/
 	void insert (Key key);
 
+	int getSize() const;
+
 	/*
 		функция для тестирования
 	*/
-
 	void print_tree ();
 };
 #include "AVLtree.hpp"
