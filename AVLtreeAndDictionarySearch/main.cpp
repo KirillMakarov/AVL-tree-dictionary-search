@@ -3,13 +3,26 @@
 
 using namespace std;
 
+//int main () {
+//	cout<<"==== Part I ====\n";
+//	MySpellChecker checker;
+//	
+//	//todo: интерактив с пользователем
+//	string full_path = "input_dictionary.txt";
+//	checker.readDictionaryFile(full_path);
+//
+//	system("pause");
+//	return EXIT_SUCCESS;
+//}
+
 int main () {
-	cout<<"==== Part I ====\n";
-	MySpellChecker checker;
-	
-	//todo: интерактив с пользователем
-	string full_path = "input_dictionary.txt";
-	checker.readDictionaryFile(full_path);
+
+	AVLtree<int> test_tree;
+	for (int i =127; i > 0; i--)
+		test_tree.insert(i);
+	test_tree.print_tree();
+	cout<<"ROOT: "<<test_tree.root->key <<"\tHeight: "<< (int)test_tree.root -> height<<endl; 
+
 
 	system("pause");
 	return EXIT_SUCCESS;

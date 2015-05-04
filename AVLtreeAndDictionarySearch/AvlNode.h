@@ -25,6 +25,10 @@ class AvlNode {
 	unsigned char height;
 
 	AvlNode(Key key_from_user):key(key_from_user), left(0), right(0), height(1){}
+
+	/*
+	Возвращает left.height - right.height
+	*/
 	short getDeltaBalanceOfNode();
 	void recomputeHeight();
 };
