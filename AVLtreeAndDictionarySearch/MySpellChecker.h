@@ -34,6 +34,9 @@ private:
 	AVLtree<string> dictionary, words;
 	void readCustomFile(string path, AVLtree<string> &avl_tree);
 	void recursive_compare(AvlNode<string>* node);
+
+	string to_lower_case (const string s);
+	string trim_punct (const string s);
 };
 
 #endif
