@@ -58,7 +58,7 @@ string MySpellChecker::trim_punct(const string s){
 	string result ="";
 	for (basic_string<char>::const_iterator i = s.begin(); i!=s.end(); i++)
 	{
-		if (*i >= 0 && *i <= 255 && (!ispunct(*i)|| *i == '-') && (*i<'0' || *i>'9'))
+		if (*i >= 0 && *i <= 255 && (!ispunct(*i) || *i == '-'|| *i=='\'' ))
 			result += *i;
 	}
 	return result;
