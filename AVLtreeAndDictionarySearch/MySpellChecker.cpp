@@ -67,4 +67,109 @@ string MySpellChecker::trim_punct(const string s){
 bool MySpellChecker::isAVLTree (){
 	return dictionary.isAVLTree();
 }
+
+//methods from Part #2
+void MySpellChecker::getRecommendations(){
+	recursive_recommendations(words.getRoot());
+}
+
+
+//служебный метод меняющий позиции с индексами from и to местами в слове s.
+string MySpellChecker::swap_letter (int from, int to, const string& s){
+	if (from < 0 || to > s.length() - 1) return s;
+	string result = s;
+	result[from] = s[to];
+	result[to] = s[from];
+	return result;
+}
+
+//служебный метод, создающий новую строку с удаленным символом под индексом from в слове s.
+string MySpellChecker::remove_letter(int from, string &s)
+{
+	if (from < 0 || from > s.length() - 1) return s;
+
+	string result;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if ( i!= from)
+			result+=s[i];
+	}
+	return result;
+}
+
+//служебный метод, вставляющий символ symb после индекса after в строку s.
+//чтобы вставить перед нулевым символом, after = -1.
+string MySpellChecker::insert_letter_after(int after, char symb, string &s)
+{
+	if (after < -1 || after > s.length() - 1) return s;
+
+	string result = s.substr(0, after+1) + symb + s.substr(after+1, s.length() - after - 1);
+	return result;
+}
+
+//Метод определяет, существует ли слово word в словаре. Если существует, то добавляет его в список
+//для предложенных слов и выводит на экран, если оно не было добавлено ранее.
+void MySpellChecker::check_to_suggest(set<string>& was_suggested, string word) {
+	if (was_suggested.find(word)==was_suggested.end() && dictionary.find(word))
+	{
+		if (was_suggested.size() == 0)
+			cout<<word;
+		else
+			cout<<", "<<word;
+		was_suggested.insert(word);
+	}
+}
+
+void MySpellChecker::recursive_recommendations(AvlNode<string>* node){
+	if (node)
+	{
+		recursive_recommendations(node->left);
+		recursive_recommendations(node->right);
+
+		string to_find_in_lower_case;
+		to_find_in_lower_case = to_lower_case(node->key);
+		if (!dictionary.find(to_find_in_lower_case))
+		{
+			string& word = to_find_in_lower_case;
+			string word_to_suggest = word; // чтобы не испортить слово в словаре
+			cout<< word<<"\t\t";
+
+			set<string> was_suggested;
+
+			//#1 Transposing of adjacent letters
+			for (int i = 0; i < word.length() - 1; i++)
+			{
+				string transp_word = swap_letter(i, i+1, word);
+				check_to_suggest(was_suggested, transp_word);
+			}
+
+			//#2 Removal of each letter
+			for (int i = 0; i < word.length(); i++)
+			{
+				string del_word = remove_letter(i, word);
+				check_to_suggest(was_suggested, del_word);
+			}
+
+			//#3 Replacement of each letter
+			for (char i ='a'; i <= 'z'; i++){
+				for (int j = 0; j < word.length(); j++)
+				{
+					string new_word = word;
+					new_word[j] = i;
+					check_to_suggest(was_suggested, new_word);
+				}
+			}
+
+			//#4 Inserting any letter at any position in a word
+			for (char i ='a'; i <= 'z'; i++){
+				for (int j = -1; j < word.length(); j++)
+				{
+					string new_word = insert_letter_after(j, i, word);
+					check_to_suggest(was_suggested, new_word);
+				}
+			}
+			cout<<endl;
+		}
+	}
+}
 #endif

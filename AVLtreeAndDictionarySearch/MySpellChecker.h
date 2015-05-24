@@ -2,6 +2,7 @@
 #define MYSPELLCHECKER_H
 #include "AVLtree.h"
 #include <string>
+#include <set>
 using namespace std;
 
 class MySpellChecker {
@@ -30,13 +31,25 @@ public:
 	*/
 	void compare();
 
+	/*
+		Выводит на экран рекомендации по исправлению ошибок в формате:
+		1\t\t2, 3, 4
+		где 1 -- слово не найденное в словаре
+		2, 3, 4 -- слова, содержащиеся в словаре, рекомендации к исправлению ошибки. Это множество может быть пустым.
+	*/
+	void getRecommendations();
+
 private:
 	AVLtree<string> dictionary, words;
 	void readCustomFile(string path, AVLtree<string> &avl_tree);
 	void recursive_compare(AvlNode<string>* node);
-
+	void recursive_recommendations(AvlNode<string>* node);
 	string to_lower_case (const string s);
 	string trim_punct (const string s);
+	string swap_letter (int from, int to, const string& s);
+	string remove_letter(int from, string &s);
+	string insert_letter_after(int after, char symb, string &s);
+	void check_to_suggest(set<string>& was_suggested, string word);
 };
 
 #endif

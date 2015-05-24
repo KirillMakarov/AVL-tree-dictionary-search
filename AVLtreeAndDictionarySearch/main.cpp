@@ -10,13 +10,16 @@ int main () {
 
 	//todo: интерактив с пользователем
 	string full_path = "input_dictionary_full.txt";
-	string document_path = "input.txt";
+	string document_path = "doc1.txt";
 	cout<<"Считывание словаря...\n";
 	checker.readDictionaryFile(full_path);
 	cout<<"Считывание документа...\n";
 	checker.readDocumentationFile(document_path);
 	cout<<"Обработка документа...\n";
 	checker.compare();
+
+	cout<<"==== Part II ====\n";
+	checker.getRecommendations();
 	system("pause");
 	return EXIT_SUCCESS;
 }
