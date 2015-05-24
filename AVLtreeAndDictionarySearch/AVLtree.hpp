@@ -140,4 +140,30 @@ bool AVLtree<Key>::find(Key key){
 	}
 	return true;
 }
+
+template <class Key>
+bool AVLtree<Key>::isAVLTree(){
+	return recursive_isAVLTree(root);
+}
+
+template<class Key>
+bool AVLtree<Key>::recursive_isAVLTree(AvlNode<Key>* node){
+	if (node)
+	{
+		short delta_balance_of_current_node = node->getDeltaBalanceOfNode();
+		if (delta_balance_of_current_node <= 1 || delta_balance_of_current_node >= -1)
+		{
+			//у текущей вершины выполняется свойство сбалансированности, посчитаем у детей.
+			return recursive_isAVLTree(node->left) && recursive_isAVLTree(node->right);
+		}
+		{
+			return false; // если у текущей вершины не выполняется свойство сбалансированности
+		}
+	}
+	else {
+		//если у узла только 1 ребенок, то это условие для нулевого.
+		return true;
+	}
+}
+
 #endif

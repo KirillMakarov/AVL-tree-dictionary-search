@@ -27,7 +27,8 @@ class AvlNode {
 	AvlNode(Key key_from_user):key(key_from_user), left(0), right(0), height(1){}
 
 	/*
-	Возвращает left.height - right.height
+	Возвращает left.height - right.height, значения left и right должны быть посчитаны верно,
+	это свойство должно быть обеспечено при вставке с помощью recomputeHeight().
 	*/
 	short getDeltaBalanceOfNode();
 	void recomputeHeight();

@@ -63,4 +63,8 @@ string MySpellChecker::trim_punct(const string s){
 	}
 	return result;
 }
+
+bool MySpellChecker::isAVLTree (){
+	return dictionary.isAVLTree();
+}
 #endif

@@ -33,9 +33,14 @@ private:
 	int size;
 
 	void destroy(AvlNode<Key>* node);
+
+	bool recursive_isAVLTree(AvlNode<Key>* node);
 public:
 	AVLtree():root(0), size(0){}
 	~AVLtree(){destroy(root);}
+
+	bool isAVLTree();
+
 	AvlNode<Key>* getRoot(){return root;}
 	/*
 	Добавляет элемент key в AVL дерево,
