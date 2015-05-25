@@ -21,6 +21,9 @@
     <ClCompile Include="MySpellChecker.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="HashTable.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVLtree.h">
@@ -37,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="AVLNode.hpp">
       <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

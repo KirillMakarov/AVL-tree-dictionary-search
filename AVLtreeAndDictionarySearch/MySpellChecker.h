@@ -1,6 +1,7 @@
 ﻿#ifndef MYSPELLCHECKER_H
 #define MYSPELLCHECKER_H
 #include "AVLtree.h"
+#include "HashTable.h"
 #include <string>
 #include <set>
 using namespace std;
@@ -39,6 +40,16 @@ public:
 	*/
 	void getRecommendations();
 
+	/*
+		Читает словарь в хеш таблицу.
+	*/
+	void readDictionaryFileAtHashTable(string path);
+
+	/*
+		Вывод слов, не содержащихся в словаре, используя hashTable в качестве словаря.
+	*/
+	void compareHash();
+
 private:
 	AVLtree<string> dictionary, words;
 	void readCustomFile(string path, AVLtree<string> &avl_tree);
@@ -50,6 +61,10 @@ private:
 	string remove_letter(int from, string &s);
 	string insert_letter_after(int after, char symb, string &s);
 	void check_to_suggest(set<string>& was_suggested, string word);
+
+//Part III
+	HashTable hashTable;
+	void recursive_compareHash(AvlNode<string>* node);
 };
 
 #endif

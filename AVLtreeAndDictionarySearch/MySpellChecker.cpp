@@ -13,7 +13,8 @@ void MySpellChecker::readCustomFile(string path, AVLtree<string> &avl_tree){
 	{
 		input_fstream >> word;
 		word = trim_punct(word);
-		avl_tree.insert(word);
+		if (word != "")
+			avl_tree.insert(word);
 	}
 }
 
@@ -172,4 +173,43 @@ void MySpellChecker::recursive_recommendations(AvlNode<string>* node){
 		}
 	}
 }
+
+//Part III
+void MySpellChecker::readDictionaryFileAtHashTable(string path){
+	ifstream input_fstream(path);
+	string word;
+	while (input_fstream)
+	{
+		input_fstream >> word;
+		word = trim_punct(word);
+		if (word != "")
+			hashTable.insert(word);
+	}
+}
+
+
+void MySpellChecker::compareHash(){
+	recursive_compareHash(words.getRoot());
+	pair<size_t, size_t> minmax = hashTable.getMinMaxLengthOfChain();
+	cout<<"Minimum length of chain is " << minmax.first<<endl;
+	cout<<"Maximum length of chain is " << minmax.second<<endl;
+	cout<<"Average length of chain is " << hashTable.getAverage()<<endl;
+
+}
+
+void MySpellChecker::recursive_compareHash(AvlNode<string>* node){
+	if (node)
+	{
+		recursive_compareHash(node->left);
+		recursive_compareHash(node->right);
+
+		string to_find_in_lower_case;
+		to_find_in_lower_case = to_lower_case(node->key);
+		if (!hashTable.find(to_find_in_lower_case))
+		{
+			cout<< node -> key<<endl;
+		}
+	}
+}
+
 #endif

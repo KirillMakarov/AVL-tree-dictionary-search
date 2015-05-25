@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MySpellChecker.cpp" />
   </ItemGroup>
@@ -19,6 +20,7 @@
     <ClInclude Include="AVLNode.hpp" />
     <ClInclude Include="AVLtree.h" />
     <ClInclude Include="AVLtree.hpp" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="MySpellChecker.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
