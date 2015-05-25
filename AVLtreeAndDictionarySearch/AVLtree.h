@@ -17,7 +17,7 @@ private:
 	Осуществляет рекурсивную вставку элемента с ключом key, если это необходимо.
 	Возвращает current_root со сбалансированным AVL поддеревом.
 	*/
-	AvlNode<Key>* recursive_insert (Key key, AvlNode<Key>* current_root);
+	AvlNode<Key>* recursive_insert (const Key & key, AvlNode<Key>* current_root);
 
 	/*
 	Осуществляет балансировку для node_for_balance, если это необходимо.
@@ -50,7 +50,7 @@ public:
 	Если элемент уже добавлен в дерево, то повторного добавления не осуществляется,
 	то есть двух элементов с одинаковым ключом в AVL-дереве не существует.
 	*/
-	void insert (Key key);
+	void insert (const Key& key);
 	int getSize() const;
 	bool find (Key key);
 

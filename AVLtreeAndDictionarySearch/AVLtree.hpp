@@ -73,7 +73,7 @@ AvlNode<Key>* AVLtree<Key, Comparator> :: balance (AvlNode<Key>* node_for_balanc
 }
 
 template <class Key, class Comparator>
-AvlNode<Key>* AVLtree<Key, Comparator>::recursive_insert (Key key, AvlNode<Key>* current_root){
+AvlNode<Key>* AVLtree<Key, Comparator>::recursive_insert (const Key& key, AvlNode<Key>* current_root){
 
 	if (current_root == nullptr)
 	{
@@ -93,7 +93,7 @@ AvlNode<Key>* AVLtree<Key, Comparator>::recursive_insert (Key key, AvlNode<Key>*
 }
 
 template <class Key, class Comparator>
-void AVLtree<Key, Comparator>::insert(Key key){
+void AVLtree<Key, Comparator>::insert(const Key& key){
 	root = recursive_insert(key, root);
 }
 

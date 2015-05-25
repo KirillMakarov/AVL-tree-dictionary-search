@@ -2,6 +2,7 @@
 #define MYSPELLCHECKER_H
 #include "AVLtree.h"
 #include "HashTable.h"
+#include "StringHash.h"
 #include <string>
 #include <set>
 using namespace std;
@@ -54,6 +55,7 @@ private:
 	AVLtree<string, less<string> > dictionary, words;
 	void readCustomFile(string path, AVLtree<string, less<string> > &avl_tree);
 	void recursive_compare(AvlNode<string>* node);
+
 	void recursive_recommendations(AvlNode<string>* node);
 	string to_lower_case (const string s);
 	string trim_punct (const string s);
@@ -63,7 +65,7 @@ private:
 	void check_to_suggest(set<string>& was_suggested, string word);
 
 //Part III
-	HashTable hashTable;
+	HashTable<string, StringHash>  hashTable;
 	void recursive_compareHash(AvlNode<string>* node);
 };
 
