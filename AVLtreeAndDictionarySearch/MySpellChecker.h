@@ -51,8 +51,8 @@ public:
 	void compareHash();
 
 private:
-	AVLtree<string> dictionary, words;
-	void readCustomFile(string path, AVLtree<string> &avl_tree);
+	AVLtree<string, less<string> > dictionary, words;
+	void readCustomFile(string path, AVLtree<string, less<string> > &avl_tree);
 	void recursive_compare(AvlNode<string>* node);
 	void recursive_recommendations(AvlNode<string>* node);
 	string to_lower_case (const string s);

@@ -2,8 +2,8 @@
 #define AVLTREE_HPP
 #include "AVLtree.h"
 
-template <class Key>
-int AVLtree<Key>::getSize() const
+template <class Key, class Comparator>
+int AVLtree<Key, Comparator>::getSize() const
 {
 	return size;
 }
@@ -14,8 +14,8 @@ int AVLtree<Key>::getSize() const
 //Делает левый поворот вокруг node_for_rotate
 //возвращает корень сбалансированного дерева (это может быть не node_for_rotate)
 //
-template <class Key>
-AvlNode<Key>* AVLtree<Key>::simple_rotate_left (AvlNode<Key>* node_for_rotate){
+template <class Key, class Comparator>
+AvlNode<Key>* AVLtree<Key, Comparator>::simple_rotate_left (AvlNode<Key>* node_for_rotate){
 	AvlNode<Key>* temp_node = node_for_rotate -> right;
 	node_for_rotate ->right = temp_node->left;
 	temp_node -> left = node_for_rotate;
@@ -26,8 +26,8 @@ AvlNode<Key>* AVLtree<Key>::simple_rotate_left (AvlNode<Key>* node_for_rotate){
 	return temp_node;
 }
 
-template <class Key>
-AvlNode<Key>* AVLtree<Key>::simple_rotate_right (AvlNode<Key>* node_for_rotate){
+template <class Key, class Comparator>
+AvlNode<Key>* AVLtree<Key, Comparator>::simple_rotate_right (AvlNode<Key>* node_for_rotate){
 	AvlNode<Key>* temp_node = node_for_rotate -> left;
 	node_for_rotate ->left = temp_node->right;
 	temp_node -> right = node_for_rotate;
@@ -39,8 +39,8 @@ AvlNode<Key>* AVLtree<Key>::simple_rotate_right (AvlNode<Key>* node_for_rotate){
 
 //Возвращает корень сбалансированного поддерева
 //при условии, что все потомки данного корня сбалансированы.
-template <class Key>
-AvlNode<Key>* AVLtree<Key> :: balance (AvlNode<Key>* node_for_balance){
+template <class Key, class Comparator>
+AvlNode<Key>* AVLtree<Key, Comparator> :: balance (AvlNode<Key>* node_for_balance){
 	node_for_balance -> recomputeHeight();
 	short delta_balance = node_for_balance -> getDeltaBalanceOfNode();
 
@@ -72,8 +72,8 @@ AvlNode<Key>* AVLtree<Key> :: balance (AvlNode<Key>* node_for_balance){
 	return node_for_balance;
 }
 
-template <class Key>
-AvlNode<Key>* AVLtree<Key>::recursive_insert (Key key, AvlNode<Key>* current_root){
+template <class Key, class Comparator>
+AvlNode<Key>* AVLtree<Key, Comparator>::recursive_insert (Key key, AvlNode<Key>* current_root){
 
 	if (current_root == nullptr)
 	{
@@ -83,7 +83,7 @@ AvlNode<Key>* AVLtree<Key>::recursive_insert (Key key, AvlNode<Key>* current_roo
 	if (key == current_root -> key)
 		return current_root;
 
-	if (key < current_root -> key)
+	if (comparator(key, current_root -> key))
 		current_root -> left = recursive_insert(key, current_root -> left);
 	else 
 		current_root -> right = recursive_insert(key, current_root -> right);
@@ -92,19 +92,19 @@ AvlNode<Key>* AVLtree<Key>::recursive_insert (Key key, AvlNode<Key>* current_roo
 	return balance(current_root);
 }
 
-template <class Key>
-void AVLtree<Key>::insert(Key key){
+template <class Key, class Comparator>
+void AVLtree<Key, Comparator>::insert(Key key){
 	root = recursive_insert(key, root);
 }
 
-template <class Key>
-void AVLtree<Key>::print_tree(){
+template <class Key, class Comparator>
+void AVLtree<Key, Comparator>::print_tree(){
 	recursive_print(root, 0);
 }
 
 //todo delete this function in release version
-template <class Key>
-void AVLtree<Key>::recursive_print(AvlNode<Key>* p, int level){
+template <class Key, class Comparator>
+void AVLtree<Key, Comparator>::recursive_print(AvlNode<Key>* p, int level){
 	 if(p)
     {
         recursive_print(p->left,level + 1);
@@ -115,8 +115,8 @@ void AVLtree<Key>::recursive_print(AvlNode<Key>* p, int level){
 }
 
 
-template <class Key>
-void AVLtree<Key>::destroy(AvlNode<Key>* node){
+template <class Key, class Comparator>
+void AVLtree<Key, Comparator>::destroy(AvlNode<Key>* node){
 	if (node)
 	{
 		destroy(node->left);
@@ -125,29 +125,29 @@ void AVLtree<Key>::destroy(AvlNode<Key>* node){
 	}
 }
 
-template <class Key>
-bool AVLtree<Key>::find(Key key){
+template <class Key, class Comparator>
+bool AVLtree<Key, Comparator>::find(Key key){
 	if (!root) return false;
 	AvlNode<Key>* temp_node = root;
 	while (temp_node->key != key)
 	{
-		if (key > temp_node->key)
-			temp_node = temp_node -> right;
-		else 
+		if (comparator(key, temp_node->key))
 			temp_node = temp_node -> left;
+		else
+			temp_node = temp_node -> right;
 		if (!temp_node)
 			return false;
 	}
 	return true;
 }
 
-template <class Key>
-bool AVLtree<Key>::isAVLTree(){
+template <class Key, class Comparator>
+bool AVLtree<Key, Comparator>::isAVLTree(){
 	return recursive_isAVLTree(root);
 }
 
-template<class Key>
-bool AVLtree<Key>::recursive_isAVLTree(AvlNode<Key>* node){
+template<class Key, class Comparator>
+bool AVLtree<Key, Comparator>::recursive_isAVLTree(AvlNode<Key>* node){
 	if (node)
 	{
 		short delta_balance_of_current_node = node->getDeltaBalanceOfNode();
@@ -165,5 +165,4 @@ bool AVLtree<Key>::recursive_isAVLTree(AvlNode<Key>* node){
 		return true;
 	}
 }
-
 #endif

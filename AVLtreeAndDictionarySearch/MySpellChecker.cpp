@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cctype>
 
-void MySpellChecker::readCustomFile(string path, AVLtree<string> &avl_tree){
+void MySpellChecker::readCustomFile(string path, AVLtree<string, less<string>> &avl_tree){
 	ifstream input_fstream(path);
 	string word;
 	while (input_fstream)

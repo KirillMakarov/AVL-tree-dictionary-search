@@ -9,7 +9,7 @@
 //=============================================================================
 
 //TODO: Реализовать удаление узла в качестве дополнительного задания.
-template <class Key>
+template <class Key, class Comparator>
 class AVLtree {
 private:
 	AvlNode<Key>* root;
@@ -35,6 +35,7 @@ private:
 	void destroy(AvlNode<Key>* node);
 
 	bool recursive_isAVLTree(AvlNode<Key>* node);
+	Comparator comparator;
 public:
 	AVLtree():root(0), size(0){}
 	~AVLtree(){destroy(root);}
