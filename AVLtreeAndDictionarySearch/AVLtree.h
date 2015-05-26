@@ -28,7 +28,6 @@ private:
 	AvlNode<Key>* simple_rotate_left (AvlNode<Key>* node_for_rotate);
 	AvlNode<Key>* simple_rotate_right (AvlNode<Key>* node_for_rotate);
 
-	void recursive_print(AvlNode<Key>* p, int level);
 
 	int size;
 
