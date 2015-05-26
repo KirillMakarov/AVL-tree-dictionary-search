@@ -8,7 +8,7 @@ using namespace std;
 template <class Key, class HashFunction>
 class HashTable{
 private:
-	static const unsigned int DEFAULT_CAPACITY = 191625;//N=10 Выделять паять нужно динамически, так у меня падает со stackoverflow
+	static const unsigned int DEFAULT_CAPACITY = 190000;//N=10 Выделять паять нужно динамически, так у меня падает со stackoverflow
 	static const float load_factor;
 	unsigned int capacity;
 	forward_list<pair<unsigned int, Key> * >* hash_table;
@@ -18,6 +18,7 @@ private:
 	*/
 	unsigned int size;
 	HashFunction hashFunction;
+	void resize(unsigned int new_capacity_value);
 public:
 	void insert(const Key& key);
 	bool find(const Key& key);
@@ -31,6 +32,7 @@ public:
 		hash_table = new forward_list<pair <unsigned int, Key>* > [capacity];
 	}
 	~HashTable(){
+		cout<<"In dest";
 		for (int i = 0; i < capacity; i++)
 		{
 			for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)

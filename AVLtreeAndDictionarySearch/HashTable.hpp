@@ -19,9 +19,11 @@ void HashTable<Key, HashFunction>::insert(const Key & word){
 	{
 		if ((*it)->second == word) return; //проверка на уникальность
 	}
-	
+
 	hash_table[index_in_table].push_front(new pair<unsigned int, Key>(hash_of_word, word));
 	size++;
+
+	//if (getAverage()>load_factor) resize(2*capacity);
 }
 
 template <class Key, class HashFunction>
@@ -55,5 +57,22 @@ pair<size_t, size_t> HashTable<Key, HashFunction>::getMinMaxLengthOfChain(){
 template <class Key, class HashFunction>
 double HashTable<Key, HashFunction>::getAverage(){
 	return (double)size/capacity;
+}
+
+template <class Key, class HashFunction>
+void HashTable<Key, HashFunction>::resize(unsigned int new_capacity_value){
+	forward_list<pair<unsigned int, Key> * >* temp_hashTable = new forward_list<pair<unsigned int, Key> * >  [new_capacity_value];
+
+	for (int i = 0; i < capacity; i++)
+		{
+			for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)
+			{
+				temp_hashTable[((*it)->first)%new_capacity_value].push_front((*it));
+			}
+			//delete forward_list;
+		}
+	hash_table = temp_hashTable;
+	capacity = new_capacity_value;
+
 }
 #endif
