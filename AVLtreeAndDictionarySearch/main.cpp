@@ -13,7 +13,7 @@ int main () {
 	
 	cout<<"==== Part I ====\n";
 	cout<<"Считывание словаря...\n";
-	checker->readDictionaryFile(full_path);
+	//checker->readDictionaryFile(full_path);
 	cout<<"Считывание документа...\n";
 	checker->readDocumentationFile(document_path);
 	cout<<"Обработка документа...\n";

@@ -185,6 +185,7 @@ void MySpellChecker::readDictionaryFileAtHashTable(string path){
 		if (word != "")
 			hashTable.insert(word);
 	}
+	input_fstream.close();
 }
 
 

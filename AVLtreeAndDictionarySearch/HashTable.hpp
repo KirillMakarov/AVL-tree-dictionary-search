@@ -61,15 +61,15 @@ double HashTable<Key, HashFunction>::getAverage(){
 
 template <class Key, class HashFunction>
 void HashTable<Key, HashFunction>::resize(unsigned int new_capacity_value){
-	forward_list<pair<unsigned int, Key> * >* temp_hashTable = new forward_list<pair<unsigned int, Key> * >  [new_capacity_value];
+	list<pair<unsigned int, Key> * >* temp_hashTable = new list<pair<unsigned int, Key> * >  [new_capacity_value];
 
 	for (int i = 0; i < capacity; i++)
+	{
+		for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)
 		{
-			for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)
-			{
-				temp_hashTable[((*it)->first)%new_capacity_value].push_front((*it));
-			}
+			temp_hashTable[((*it)->first)%new_capacity_value].push_front((*it));
 		}
+	}
 
 	//указатели на прежние элементы уже лежат в новой таблице.
 	//удаляем старые листы.
@@ -77,7 +77,6 @@ void HashTable<Key, HashFunction>::resize(unsigned int new_capacity_value){
 	//теперь hash_table указывает на temp_hashTable
 	hash_table = temp_hashTable;
 	capacity = new_capacity_value;
-
 }
 
 template <class Key, class HashFunction>
@@ -96,6 +95,25 @@ unsigned int HashTable<Key, HashFunction>::getSize(){
 template <class Key, class HashFunction>
 unsigned int HashTable<Key, HashFunction>::getCapacity(){
 	return capacity;
+}
+
+template <class Key, class HashFunction>
+bool HashTable<Key, HashFunction>::erase(const Key& word){
+	unsigned int hash_of_word = hash(word);
+	unsigned int index_in_table = hash_of_word%capacity;
+	for (auto it = hash_table[index_in_table].begin() ; it != hash_table[index_in_table].end();it++)
+	{
+		if ((*it)->second == word)
+		{
+			pair<unsigned int, Key>* pair_to_delete = *it;
+			hash_table[index_in_table].erase(it);
+			delete pair_to_delete;
+			size--;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 #endif
