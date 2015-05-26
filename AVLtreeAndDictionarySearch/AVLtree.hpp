@@ -98,24 +98,6 @@ void AVLtree<Key, Comparator>::insert(const Key& key){
 }
 
 template <class Key, class Comparator>
-void AVLtree<Key, Comparator>::print_tree(){
-	recursive_print(root, 0);
-}
-
-//todo delete this function in release version
-template <class Key, class Comparator>
-void AVLtree<Key, Comparator>::recursive_print(AvlNode<Key>* p, int level){
-	 if(p)
-    {
-        recursive_print(p->left,level + 1);
-        for(int i = 0;i< level;i++) cout<<"   ";
-        cout << p->key << endl;
-        recursive_print(p->right,level + 1);
-    }
-}
-
-
-template <class Key, class Comparator>
 void AVLtree<Key, Comparator>::destroy(AvlNode<Key>* node){
 	if (node)
 	{
@@ -126,7 +108,7 @@ void AVLtree<Key, Comparator>::destroy(AvlNode<Key>* node){
 }
 
 template <class Key, class Comparator>
-bool AVLtree<Key, Comparator>::find(Key key){
+bool AVLtree<Key, Comparator>::find(const Key& key){
 	if (!root) return false;
 	AvlNode<Key>* temp_node = root;
 	while (temp_node->key != key)

@@ -52,12 +52,8 @@ public:
 	*/
 	void insert (const Key& key);
 	int getSize() const;
-	bool find (Key key);
+	bool find (const Key& key);
 
-	/*
-		функция для тестирования
-	*/
-	void print_tree ();
 };
 #include "AVLtree.hpp"
 #endif

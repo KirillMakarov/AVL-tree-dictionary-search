@@ -13,8 +13,10 @@ void MySpellChecker::readCustomFile(string path, AVLtree<string, less<string>> &
 	{
 		input_fstream >> word;
 		word = trim_punct(word);
-		if (word != "")
-			avl_tree.insert(word);
+		string word_lower_case;
+		word_lower_case = to_lower_case(word);
+		if (word_lower_case != "")
+			avl_tree.insert(word_lower_case);
 	}
 }
 
@@ -59,7 +61,7 @@ string MySpellChecker::trim_punct(const string s){
 	string result ="";
 	for (basic_string<char>::const_iterator i = s.begin(); i!=s.end(); i++)
 	{
-		if (*i >= 0 && *i <= 255 && (!ispunct(*i) || *i == '-'|| *i=='\'' ))
+		if (*i >= 0 && *i <= 255 && (!ispunct(*i) || *i == '-'))
 			result += *i;
 	}
 	return result;
