@@ -9,8 +9,9 @@ template <class Key, class HashFunction>
 class HashTable{
 private:
 	static const unsigned int DEFAULT_CAPACITY = 191625;//N=10 Выделять паять нужно динамически, так у меня падает со stackoverflow
+	static const float load_factor;
 	unsigned int capacity;
-	forward_list<Key>* hash_table;
+	forward_list<pair<unsigned int, Key> * >* hash_table;
 	unsigned int hash (const Key& key);
 	/*
 		количество элементов типа Key в хеш-таблице.
@@ -22,19 +23,19 @@ public:
 	bool find(const Key& key);
 	HashTable(): size(0){ 
 		capacity = DEFAULT_CAPACITY;
-		hash_table = new forward_list<Key> [capacity];
+		hash_table = new forward_list<pair<unsigned int, Key>* > [capacity];
 	}
 
 	HashTable(unsigned int initial_capacity):size(0) { 
 		capacity = initial_capacity;
-		hash_table = new forward_list<Key> [capacity];
+		hash_table = new forward_list<pair <unsigned int, Key>* > [capacity];
 	}
 	~HashTable(){
 		for (int i = 0; i < capacity; i++)
 		{
 			for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)
 			{
-				(*it) .clear();
+				delete *it;
 			}
 		}
 		delete [] hash_table;

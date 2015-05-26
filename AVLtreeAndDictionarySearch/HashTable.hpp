@@ -3,6 +3,9 @@
 #include "HashTable.h"
 
 template <class Key, class HashFunction>
+const float HashTable<Key, HashFunction>::load_factor = 0.75f;
+
+template <class Key, class HashFunction>
 unsigned int HashTable<Key, HashFunction>::hash(const Key& word){
 	unsigned int h_val = hashFunction(word);
 	return h_val;
@@ -10,22 +13,24 @@ unsigned int HashTable<Key, HashFunction>::hash(const Key& word){
 
 template <class Key, class HashFunction>
 void HashTable<Key, HashFunction>::insert(const Key & word){
-	unsigned int index_in_table = hash(word)%capacity;
+	unsigned int hash_of_word = hash(word);
+	unsigned int index_in_table = hash_of_word%capacity;
 	for (auto it = hash_table[index_in_table].begin(); it != hash_table[index_in_table].end();it++)
 	{
-		if (*it == word) return; //проверка на уникальность
+		if ((*it)->second == word) return; //проверка на уникальность
 	}
 	
-	hash_table[index_in_table].push_front(word);
+	hash_table[index_in_table].push_front(new pair<unsigned int, Key>(hash_of_word, word));
 	size++;
 }
 
 template <class Key, class HashFunction>
 bool HashTable<Key, HashFunction>::find(const Key & word) {
-	unsigned int index_in_table = hash(word)%capacity;
+	unsigned int hash_of_word = hash(word);
+	unsigned int index_in_table = hash_of_word%capacity;
 	for (auto it = hash_table[index_in_table].begin(); it != hash_table[index_in_table].end();it++)
 	{
-		if (*it == word) return true; //проверка на уникальность
+		if ((*it)->second == word) return true; //проверка на уникальность
 	}
 	return false;
 }
