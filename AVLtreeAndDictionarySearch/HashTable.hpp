@@ -5,24 +5,24 @@
 template <class Key, class HashFunction>
 unsigned int HashTable<Key, HashFunction>::hash(const Key& word){
 	unsigned int h_val = hashFunction(word);
-	return h_val % size_of_table;
+	return h_val;
 }
 
 template <class Key, class HashFunction>
 void HashTable<Key, HashFunction>::insert(const Key & word){
-	unsigned int index_in_table = hash(word);
+	unsigned int index_in_table = hash(word)%capacity;
 	for (auto it = hash_table[index_in_table].begin(); it != hash_table[index_in_table].end();it++)
 	{
 		if (*it == word) return; //проверка на уникальность
 	}
 	
 	hash_table[index_in_table].push_front(word);
-	average_length = average_length + (1.0/size_of_table);
+	size++;
 }
 
 template <class Key, class HashFunction>
 bool HashTable<Key, HashFunction>::find(const Key & word) {
-	unsigned int index_in_table = hash(word);
+	unsigned int index_in_table = hash(word)%capacity;
 	for (auto it = hash_table[index_in_table].begin(); it != hash_table[index_in_table].end();it++)
 	{
 		if (*it == word) return true; //проверка на уникальность
@@ -35,7 +35,7 @@ template <class Key, class HashFunction>
 pair<size_t, size_t> HashTable<Key, HashFunction>::getMinMaxLengthOfChain(){
 	//min, max
 	pair<size_t, size_t> minmax(INT_MAX, 0);
-	for (int i = 0; i < size_of_table; i++){
+	for (int i = 0; i < capacity; i++){
 		size_t length = 0;
 		for (auto it = hash_table[i].begin(); it != hash_table[i].end();it++)
 		{
@@ -49,6 +49,6 @@ pair<size_t, size_t> HashTable<Key, HashFunction>::getMinMaxLengthOfChain(){
 
 template <class Key, class HashFunction>
 double HashTable<Key, HashFunction>::getAverage(){
-	return average_length;
+	return (double)size/capacity;
 }
 #endif
