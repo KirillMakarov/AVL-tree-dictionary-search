@@ -194,6 +194,8 @@ void MySpellChecker::compareHash(){
 	cout<<"Minimum length of chain is " << minmax.first<<endl;
 	cout<<"Maximum length of chain is " << minmax.second<<endl;
 	cout<<"Average length of chain is " << hashTable.getAverage()<<endl;
+	cout<<"Capacity of hashtable is " << hashTable.getCapacity()<<endl;
+	cout<<"Size of hashtable is " << hashTable.getSize()<<endl;
 
 }
 
@@ -211,5 +213,6 @@ void MySpellChecker::recursive_compareHash(AvlNode<string>* node){
 		}
 	}
 }
+
 
 #endif

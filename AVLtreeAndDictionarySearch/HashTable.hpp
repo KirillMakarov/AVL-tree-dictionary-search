@@ -3,7 +3,7 @@
 #include "HashTable.h"
 
 template <class Key, class HashFunction>
-const float HashTable<Key, HashFunction>::load_factor = 0.75f;
+const float HashTable<Key, HashFunction>::load_factor = 1.0f;
 
 template <class Key, class HashFunction>
 unsigned int HashTable<Key, HashFunction>::hash(const Key& word){
@@ -79,4 +79,23 @@ void HashTable<Key, HashFunction>::resize(unsigned int new_capacity_value){
 	capacity = new_capacity_value;
 
 }
+
+template <class Key, class HashFunction>
+void HashTable<Key, HashFunction>::shrink_to_fit(){
+	if (capacity != size && size >= DEFAULT_CAPACITY) 
+	{
+		resize (size);
+	}
+}
+
+template <class Key, class HashFunction>
+unsigned int HashTable<Key, HashFunction>::getSize(){
+	return size;
+}
+
+template <class Key, class HashFunction>
+unsigned int HashTable<Key, HashFunction>::getCapacity(){
+	return capacity;
+}
+
 #endif

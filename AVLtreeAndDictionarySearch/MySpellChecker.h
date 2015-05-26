@@ -51,11 +51,17 @@ public:
 	*/
 	void compareHash();
 
+	MySpellChecker(){};
+
+	MySpellChecker(unsigned int initial_capacity_of_dictionary):hashTable(initial_capacity_of_dictionary){};
+
 private:
+//Part I
 	AVLtree<string, less<string> > dictionary, words;
 	void readCustomFile(string path, AVLtree<string, less<string> > &avl_tree);
 	void recursive_compare(AvlNode<string>* node);
 
+//Part II
 	void recursive_recommendations(AvlNode<string>* node);
 	string to_lower_case (const string s);
 	string trim_punct (const string s);

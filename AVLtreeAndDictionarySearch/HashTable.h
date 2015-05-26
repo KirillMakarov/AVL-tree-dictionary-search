@@ -32,7 +32,6 @@ public:
 		hash_table = new forward_list<pair <unsigned int, Key>* > [capacity];
 	}
 	~HashTable(){
-		cout<<"In dest";
 		for (int i = 0; i < capacity; i++)
 		{
 			for (auto it = hash_table[i].begin(); it != hash_table[i].end(); it++)
@@ -44,6 +43,9 @@ public:
 	}
 	pair<size_t, size_t> getMinMaxLengthOfChain();
 	double getAverage();
+	unsigned int getSize();
+	unsigned int getCapacity();
+	void shrink_to_fit();
 };
 
 #include "HashTable.hpp"
