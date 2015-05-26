@@ -23,7 +23,7 @@ void HashTable<Key, HashFunction>::insert(const Key & word){
 	hash_table[index_in_table].push_front(new pair<unsigned int, Key>(hash_of_word, word));
 	size++;
 
-	//if (getAverage()>load_factor) resize(2*capacity);
+	if (getAverage()>load_factor) resize(2*capacity);
 }
 
 template <class Key, class HashFunction>
@@ -69,8 +69,12 @@ void HashTable<Key, HashFunction>::resize(unsigned int new_capacity_value){
 			{
 				temp_hashTable[((*it)->first)%new_capacity_value].push_front((*it));
 			}
-			//delete forward_list;
 		}
+
+	//указатели на прежние элементы уже лежат в новой таблице.
+	//удаляем старые листы.
+	delete [] hash_table;
+	//теперь hash_table указывает на temp_hashTable
 	hash_table = temp_hashTable;
 	capacity = new_capacity_value;
 

@@ -8,7 +8,7 @@ using namespace std;
 template <class Key, class HashFunction>
 class HashTable{
 private:
-	static const unsigned int DEFAULT_CAPACITY = 190000;//N=10 Выделять паять нужно динамически, так у меня падает со stackoverflow
+	static const unsigned int DEFAULT_CAPACITY = 16;//N=10 Выделять паять нужно динамически, так у меня падает со stackoverflow
 	static const float load_factor;
 	unsigned int capacity;
 	forward_list<pair<unsigned int, Key> * >* hash_table;
